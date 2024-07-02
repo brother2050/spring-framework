@@ -1401,26 +1401,24 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 						throw new BeanDefinitionStoreException(bd.getResourceDescription(), beanName,
 								"Could not resolve parent bean definition '" + bd.getParentName() + "'", ex);
 					}
-					// Deep copy with overridden values.
+					// 具有覆盖值的深层复制。
 					mbd = new RootBeanDefinition(pbd);
 					mbd.overrideFrom(bd);
 				}
 
-				// Set default singleton scope, if not configured before.
+				// 如果之前未配置，请设置默认单例作用域。
 				if (!StringUtils.hasLength(mbd.getScope())) {
 					mbd.setScope(SCOPE_SINGLETON);
 				}
 
-				// A bean contained in a non-singleton bean cannot be a singleton itself.
-				// Let's correct this on the fly here, since this might be the result of
-				// parent-child merging for the outer bean, in which case the original inner bean
-				// definition will not have inherited the merged outer bean's singleton status.
+				// 包含在非单例 Bean 中的 Bean 本身不能是单例。
+				// 让我们在这里即时纠正这个问题，因为这可能是外层 Bean 的父子合并的结果，
+				// 在这种情况下，原始的内层 Bean 定义将不会继承合并的外层 Bean 的单例状态。
 				if (containingBd != null && !containingBd.isSingleton() && mbd.isSingleton()) {
 					mbd.setScope(containingBd.getScope());
 				}
 
-				// Cache the merged bean definition for the time being
-				// (it might still get re-merged later on in order to pick up metadata changes)
+				// 暂时缓存合并的 Bean 定义（以后可能仍会重新合并，以便获取元数据更改）
 				if (containingBd == null && (isCacheBeanMetadata() || isBeanEligibleForMetadataCaching(beanName))) {
 					this.mergedBeanDefinitions.put(beanName, mbd);
 				}
@@ -1481,11 +1479,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	}
 
 	/**
-	 * Clear the merged bean definition cache, removing entries for beans
-	 * which are not considered eligible for full metadata caching yet.
-	 * <p>Typically triggered after changes to the original bean definitions,
-	 * e.g. after applying a {@code BeanFactoryPostProcessor}. Note that metadata
-	 * for beans which have already been created at this point will be kept around.
+	 * 清除合并的 Bean 定义缓存，删除尚不具备完整元数据缓存条件的 Bean 条目。
+	 * <p>通常在更改原始 Bean 定义后触发，
+	 * 例如，在应用 {@code BeanFactoryPostProcessor} 之后。请注意，此时已创建的 Bean 的元数据将被保留。
 	 *
 	 * @since 4.2
 	 */
@@ -1736,8 +1732,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	}
 
 	/**
-	 * Determine whether the specified bean is eligible for having
-	 * its bean definition metadata cached.
+	 * 确定指定的 Bean 是否有资格缓存其 Bean 定义元数据。
 	 *
 	 * @param beanName the name of the bean
 	 * @return {@code true} if the bean's metadata may be cached
@@ -1748,8 +1743,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	}
 
 	/**
-	 * Remove the singleton instance (if any) for the given bean name,
-	 * but only if it hasn't been used for other purposes than type checking.
+	 * 删除给定 Bean 名称的单一实例（如果有），但前提是该实例未用于类型检查以外的其他目的。
 	 *
 	 * @param beanName the name of the bean
 	 * @return {@code true} if actually removed, {@code false} otherwise
@@ -1764,8 +1758,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	}
 
 	/**
-	 * Check whether this factory's bean creation phase already started,
-	 * i.e. whether any bean has been marked as created in the meantime.
+	 * 检查此工厂的 Bean 创建阶段是否已经开始，即在此期间是否有任何 Bean 被标记为已创建。
 	 *
 	 * @see #markBeanAsCreated
 	 * @since 4.2.2
@@ -1775,8 +1768,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	}
 
 	/**
-	 * Get the object for the given bean instance, either the bean
-	 * instance itself or its created object in case of a FactoryBean.
+	 * 获取给定 Bean 实例的对象，可以是 Bean 实例本身，也可以是 FactoryBean 中创建的对象。
 	 *
 	 * @param beanInstance the shared bean instance
 	 * @param name         the name that may include factory dereference prefix
@@ -1787,7 +1779,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	protected Object getObjectForBeanInstance(
 			Object beanInstance, String name, String beanName, @Nullable RootBeanDefinition mbd) {
 
-		// Don't let calling code try to dereference the factory if the bean isn't a factory.
+		// 如果 Bean 不是工厂，请不要让调用代码尝试取消引用工厂。
 		if (BeanFactoryUtils.isFactoryDereference(name)) {
 			if (beanInstance instanceof NullBean) {
 				return beanInstance;
@@ -1801,9 +1793,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			return beanInstance;
 		}
 
-		// Now we have the bean instance, which may be a normal bean or a FactoryBean.
-		// If it's a FactoryBean, we use it to create a bean instance, unless the
-		// caller actually wants a reference to the factory.
+		// 现在我们有了 Bean 实例，它可以是普通 Bean 或 FactoryBean。
+		// 如果它是 FactoryBean，我们用它来创建一个 Bean 实例，除非调用者实际上想要对工厂的引用。
 		if (!(beanInstance instanceof FactoryBean<?> factoryBean)) {
 			return beanInstance;
 		}
@@ -1815,8 +1806,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			object = getCachedObjectForFactoryBean(beanName);
 		}
 		if (object == null) {
-			// Return bean instance from factory.
-			// Caches object obtained from FactoryBean if it is a singleton.
+			// 从工厂返回 Bean 实例。
+			// 缓存从 FactoryBean 获取的对象（如果该对象是单例）。
 			if (mbd == null && containsBeanDefinition(beanName)) {
 				mbd = getMergedLocalBeanDefinition(beanName);
 			}
