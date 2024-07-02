@@ -1494,9 +1494,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	}
 
 	/**
-	 * Resolve the bean class for the specified bean definition,
-	 * resolving a bean class name into a Class reference (if necessary)
-	 * and storing the resolved Class in the bean definition for further use.
+	 * 解析指定 Bean 定义的 Bean 类，将 Bean 类名解析为类引用（如有必要），并将解析的类存储在 Bean 定义中以供进一步使用。
 	 *
 	 * @param mbd          the merged bean definition to determine the class for
 	 * @param beanName     the name of the bean (for error handling purposes)
@@ -1530,8 +1528,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		boolean freshResolve = false;
 
 		if (!ObjectUtils.isEmpty(typesToMatch)) {
-			// When just doing type checks (i.e. not creating an actual instance yet),
-			// use the specified temporary class loader (e.g. in a weaving scenario).
+			// 当只是进行类型检查时（即尚未创建实际实例），请使用指定的临时类加载器（例如在编织场景中）。
 			ClassLoader tempClassLoader = getTempClassLoader();
 			if (tempClassLoader != null) {
 				dynamicLoader = tempClassLoader;
@@ -1559,8 +1556,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				}
 			}
 			if (freshResolve) {
-				// When resolving against a temporary class loader, exit early in order
-				// to avoid storing the resolved Class in the bean definition.
+				// 针对临时类装入器进行解析时，请尽早退出，以避免将解析的类存储在 Bean 定义中。
 				if (dynamicLoader != null) {
 					try {
 						return dynamicLoader.loadClass(className);
@@ -1574,7 +1570,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			}
 		}
 
-		// Resolve regularly, caching the result in the BeanDefinition...
+		// 定期解析，将结果缓存在 BeanDefinition...
 		return mbd.resolveBeanClass(beanClassLoader);
 	}
 
