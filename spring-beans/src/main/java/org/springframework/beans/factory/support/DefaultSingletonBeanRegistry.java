@@ -548,10 +548,10 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 * @see #destroyBean
 	 */
 	public void destroySingleton(String beanName) {
-		// Remove a registered singleton of the given name, if any.
+		// 删除给定名称的已注册单例（如果有）。
 		removeSingleton(beanName);
 
-		// Destroy the corresponding DisposableBean instance.
+		// 销毁对应的 DisposableBean 实例。
 		DisposableBean disposableBean;
 		synchronized (this.disposableBeans) {
 			disposableBean = this.disposableBeans.remove(beanName);
@@ -566,10 +566,10 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 * @param bean the bean instance to destroy
 	 */
 	protected void destroyBean(String beanName, @Nullable DisposableBean bean) {
-		// Trigger destruction of dependent beans first...
+		// 首先触发依赖bean的破坏...
 		Set<String> dependencies;
 		synchronized (this.dependentBeanMap) {
-			// Within full synchronization in order to guarantee a disconnected Set
+			// 在完全同步范围内，以保证断开连接的集合
 			dependencies = this.dependentBeanMap.remove(beanName);
 		}
 		if (dependencies != null) {
