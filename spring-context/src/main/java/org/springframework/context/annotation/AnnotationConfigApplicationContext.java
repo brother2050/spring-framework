@@ -82,10 +82,8 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	}
 
 	/**
-	 * Create a new AnnotationConfigApplicationContext, deriving bean definitions
-	 * from the given component classes and automatically refreshing the context.
-	 * @param componentClasses one or more component classes &mdash; for example,
-	 * {@link Configuration @Configuration} classes
+	 * 创建一个新的 AnnotationConfigApplicationContext，从给定的组件类派生 Bean 定义并自动刷新上下文。
+	 * @param componentClasses 一个或多个组件类，例如 {@link Configuration @Configuration} 类
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... componentClasses) {
 		this();
@@ -94,9 +92,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	}
 
 	/**
-	 * Create a new AnnotationConfigApplicationContext, scanning for components
-	 * in the given packages, registering bean definitions for those components,
-	 * and automatically refreshing the context.
+	 * 创建一个新的 AnnotationConfigApplicationContext，扫描给定包中的组件，注册这些组件的 Bean 定义，并自动刷新上下文。
 	 * @param basePackages the packages to scan for component classes
 	 */
 	public AnnotationConfigApplicationContext(String... basePackages) {
