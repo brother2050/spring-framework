@@ -984,24 +984,25 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	BeanPostProcessorCache getBeanPostProcessorCache() {
 		synchronized (this.beanPostProcessors) {
 			BeanPostProcessorCache bppCache = this.beanPostProcessorCache;
-			if (bppCache == null) {
-				bppCache = new BeanPostProcessorCache();
-				for (BeanPostProcessor bpp : this.beanPostProcessors) {
-					if (bpp instanceof InstantiationAwareBeanPostProcessor instantiationAwareBpp) {
-						bppCache.instantiationAware.add(instantiationAwareBpp);
-						if (bpp instanceof SmartInstantiationAwareBeanPostProcessor smartInstantiationAwareBpp) {
-							bppCache.smartInstantiationAware.add(smartInstantiationAwareBpp);
-						}
-					}
-					if (bpp instanceof DestructionAwareBeanPostProcessor destructionAwareBpp) {
-						bppCache.destructionAware.add(destructionAwareBpp);
-					}
-					if (bpp instanceof MergedBeanDefinitionPostProcessor mergedBeanDefBpp) {
-						bppCache.mergedDefinition.add(mergedBeanDefBpp);
+			if (bppCache != null) {
+				return bppCache;
+			}
+			bppCache = new BeanPostProcessorCache();
+			for (BeanPostProcessor bpp : this.beanPostProcessors) {
+				if (bpp instanceof InstantiationAwareBeanPostProcessor instantiationAwareBpp) {
+					bppCache.instantiationAware.add(instantiationAwareBpp);
+					if (bpp instanceof SmartInstantiationAwareBeanPostProcessor smartInstantiationAwareBpp) {
+						bppCache.smartInstantiationAware.add(smartInstantiationAwareBpp);
 					}
 				}
-				this.beanPostProcessorCache = bppCache;
+				if (bpp instanceof DestructionAwareBeanPostProcessor destructionAwareBpp) {
+					bppCache.destructionAware.add(destructionAwareBpp);
+				}
+				if (bpp instanceof MergedBeanDefinitionPostProcessor mergedBeanDefBpp) {
+					bppCache.mergedDefinition.add(mergedBeanDefBpp);
+				}
 			}
+			this.beanPostProcessorCache = bppCache;
 			return bppCache;
 		}
 	}
