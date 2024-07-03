@@ -619,37 +619,29 @@ public interface MergedAnnotations extends Iterable<MergedAnnotation<Annotation>
 	}
 
 	/**
-	 * Search strategies supported by {@link MergedAnnotations#search(SearchStrategy)}
-	 * as well as {@link MergedAnnotations#from(AnnotatedElement, SearchStrategy)}
-	 * and variants of that method.
+	 * {@link MergedAnnotations#search（SearchStrategy）}
+	 * 以及 {@link MergedAnnotations#from（AnnotatedElement， SearchStrategy）} 和该方法的变体支持的搜索策略。
 	 *
-	 * <p>Each strategy creates a different set of aggregates that will be
-	 * combined to create the final {@link MergedAnnotations}.
+	 * <p>每种策略都会创建一组不同的聚合，这些聚合将组合在一起以创建最终的 {@link MergedAnnotations}。
 	 */
 	enum SearchStrategy {
 
 		/**
-		 * Find only directly declared annotations, without considering
-		 * {@link Inherited @Inherited} annotations and without searching
-		 * superclasses or implemented interfaces.
+		 * 仅查找直接声明的注释，而不考虑 {@link Inherited @Inherited} 注释，也不搜索超类或实现的接口。
 		 */
 		DIRECT,
 
 		/**
-		 * Find all directly declared annotations as well as any
-		 * {@link Inherited @Inherited} superclass annotations.
-		 * <p>This strategy is only really useful when used with {@link Class}
-		 * types since the {@link Inherited @Inherited} annotation is ignored for
-		 * all other {@linkplain AnnotatedElement annotated elements}.
-		 * <p>This strategy does not search implemented interfaces.
+		 * 查找所有直接声明的注释以及任何 {@link Inherited @Inherited} 超类注释。
+		 * <p>此策略仅在与 {@link Class} 类型一起使用时才真正有用，
+		 * 因为所有其他 {@linkplain@link AnnotatedElement 注释元素} 都会忽略 { Inherited @Inherited} 注释。
+		 * <p>此策略不搜索已实现的接口。
 		 */
 		INHERITED_ANNOTATIONS,
 
 		/**
-		 * Find all directly declared and superclass annotations.
-		 * <p>This strategy is similar to {@link #INHERITED_ANNOTATIONS} except
-		 * the annotations do not need to be meta-annotated with
-		 * {@link Inherited @Inherited}.
+		 * 查找所有直接声明的注释和超类注释。
+		 * <p>This strategy is similar to {@link #INHERITED_ANNOTATIONS} except the annotations do not need to be meta-annotated with {@link Inherited @Inherited}.
 		 * <p>This strategy does not search implemented interfaces.
 		 */
 		SUPERCLASS,
