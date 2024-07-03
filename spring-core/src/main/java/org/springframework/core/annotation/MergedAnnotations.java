@@ -219,9 +219,8 @@ public interface MergedAnnotations extends Iterable<MergedAnnotation<Annotation>
 			@Nullable MergedAnnotationSelector<A> selector);
 
 	/**
-	 * Get the {@linkplain MergedAnnotationSelectors#nearest() nearest} matching
-	 * annotation or meta-annotation of the specified type, or
-	 * {@link MergedAnnotation#missing()} if none is present.
+	 * 获取指定类型的 {@linkplain MergedAnnotationSelectors#nearest（） nearest} 匹配注释或元注释，
+	 * 如果不存在，则获取 {@link MergedAnnotation#missing（）}。
 	 * @param annotationType the fully qualified class name of the annotation type
 	 * to get
 	 * @return a {@link MergedAnnotation} instance
