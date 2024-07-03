@@ -124,8 +124,8 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	}
 
 	/**
-	 * Create a new GenericApplicationContext with the given DefaultListableBeanFactory.
-	 * @param beanFactory the DefaultListableBeanFactory instance to use for this context
+	 * 使用给定的 DefaultListableBeanFactory 创建新的 GenericApplicationContext。
+	 * @param beanFactory 要用于此上下文的 DefaultListableBeanFactory 实例
 	 * @see #registerBeanDefinition
 	 * @see #refresh
 	 */
@@ -135,7 +135,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	}
 
 	/**
-	 * Create a new GenericApplicationContext with the given parent.
+	 * 使用给定的父级创建新的 GenericApplicationContext。
 	 * @param parent the parent application context
 	 * @see #registerBeanDefinition
 	 * @see #refresh
@@ -146,7 +146,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	}
 
 	/**
-	 * Create a new GenericApplicationContext with the given DefaultListableBeanFactory.
+	 * 使用给定的 DefaultListableBeanFactory 创建新的 GenericApplicationContext。
 	 * @param beanFactory the DefaultListableBeanFactory instance to use for this context
 	 * @param parent the parent application context
 	 * @see #registerBeanDefinition
@@ -159,8 +159,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 
 
 	/**
-	 * Set the parent of this application context, also setting
-	 * the parent of the internal BeanFactory accordingly.
+	 * 设置此应用程序上下文的父级，并相应地设置内部 BeanFactory 的父级。
 	 * @see org.springframework.beans.factory.config.ConfigurableBeanFactory#setParentBeanFactory
 	 */
 	@Override
@@ -176,9 +175,8 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	}
 
 	/**
-	 * Set whether it should be allowed to override bean definitions by registering
-	 * a different definition with the same name, automatically replacing the former.
-	 * If not, an exception will be thrown. Default is "true".
+	 * 设置是否应允许通过注册具有相同名称的不同定义来覆盖 Bean 定义，
+	 * 并自动替换前者。否则，将引发异常。默认值为“true”。
 	 * @since 3.0
 	 * @see org.springframework.beans.factory.support.DefaultListableBeanFactory#setAllowBeanDefinitionOverriding
 	 */
@@ -187,10 +185,8 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	}
 
 	/**
-	 * Set whether to allow circular references between beans - and automatically
-	 * try to resolve them.
-	 * <p>Default is "true". Turn this off to throw an exception when encountering
-	 * a circular reference, disallowing them completely.
+	 * 设置是否允许 Bean 之间的循环引用 - 并自动尝试解析它们。
+	 * <p>默认值为“true”。关闭此选项可在遇到循环引用时引发异常，从而完全禁止它们。
 	 * @since 3.0
 	 * @see org.springframework.beans.factory.support.DefaultListableBeanFactory#setAllowCircularReferences
 	 */
@@ -199,17 +195,12 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	}
 
 	/**
-	 * Set a ResourceLoader to use for this context. If set, the context will
-	 * delegate all {@code getResource} calls to the given ResourceLoader.
-	 * If not set, default resource loading will apply.
-	 * <p>The main reason to specify a custom ResourceLoader is to resolve
-	 * resource paths (without URL prefix) in a specific fashion.
-	 * The default behavior is to resolve such paths as class path locations.
-	 * To resolve resource paths as file system locations, specify a
-	 * FileSystemResourceLoader here.
-	 * <p>You can also pass in a full ResourcePatternResolver, which will
-	 * be autodetected by the context and used for {@code getResources}
-	 * calls as well. Else, default resource pattern matching will apply.
+	 * 设置要用于此上下文的 ResourceLoader。
+	 * 如果设置，上下文会将所有 {@code getResource} 调用委托给给定的 ResourceLoader。
+	 * 如果未设置，将应用默认资源加载。
+	 * <p>指定自定义 ResourceLoader 的主要原因是以特定方式解析资源路径（不带 URL 前缀）。
+	 * 默认行为是将此类路径解析为类路径位置。若要将资源路径解析为文件系统位置，请在此处指定 FileSystemResourceLoader。
+	 * <p>还可以传入完整的 ResourcePatternResolver，上下文将自动检测该解析程序，并用于 {@code getResources} 调用。否则，将应用默认资源模式匹配。
 	 * @see #getResource
 	 * @see org.springframework.core.io.DefaultResourceLoader
 	 * @see org.springframework.core.io.FileSystemResourceLoader
@@ -226,9 +217,8 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	//---------------------------------------------------------------------
 
 	/**
-	 * This implementation delegates to this context's {@code ResourceLoader} if set,
-	 * falling back to the default superclass behavior otherwise.
-	 * <p>As of Spring Framework 5.3.22, this method also honors registered
+	 * 如果设置了此实现，则此实现将委托给此上下文的 {@code ResourceLoader}，否则将回退到默认的超类行为。
+	 * <p>从 Spring Framework 5.3.22 开始，此方法也遵循已注册的
 	 * {@linkplain #getProtocolResolvers() protocol resolvers} when a custom
 	 * {@code ResourceLoader} has been set.
 	 * @see #setResourceLoader(ResourceLoader)

@@ -29,18 +29,14 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
- * Standalone application context, accepting <em>component classes</em> as input &mdash;
- * in particular {@link Configuration @Configuration}-annotated classes, but also plain
- * {@link org.springframework.stereotype.Component @Component} types and JSR-330 compliant
- * classes using {@code jakarta.inject} annotations.
+ * 独立的应用程序上下文，接受<em>组件类</em>作为输入——特别是 {@link Configuration @Configuration} 注释类，
+ * 以及普通的 {@link org.springframework.stereotype.Component @Component} 类型
+ * 和使用 {@code jakarta.inject} 注释的 JSR-330 兼容类。
  *
- * <p>Allows for registering classes one by one using {@link #register(Class...)}
- * as well as for classpath scanning using {@link #scan(String...)}.
+ * <p>允许使用 {@link #register（Class...）} 逐个注册类，以及使用 {@link #scan（String...）} 进行类路径扫描。
  *
- * <p>In case of multiple {@code @Configuration} classes, {@link Bean @Bean} methods
- * defined in later classes will override those defined in earlier classes. This can
- * be leveraged to deliberately override certain bean definitions via an extra
- * {@code @Configuration} class.
+ * <p>如果存在多个 {@code @Configuration} 类，则在后续类中定义的 {@link Bean @Bean} 方法将覆盖在早期类中定义的方法。
+ * 这可以通过额外的 {@code @Configuration} 类来故意覆盖某些 Bean 定义。
  *
  * <p>See {@link Configuration @Configuration}'s javadoc for usage examples.
  *
@@ -61,8 +57,8 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 
 
 	/**
-	 * Create a new AnnotationConfigApplicationContext that needs to be populated
-	 * through {@link #register} calls and then manually {@linkplain #refresh refreshed}.
+	 * 创建一个新的 AnnotationConfigApplicationContext，
+	 * 需要通过 {@link #register} 调用进行填充，然后手动 {@linkplain #refresh refreshed}。
 	 */
 	public AnnotationConfigApplicationContext() {
 		StartupStep createAnnotatedBeanDefReader = getApplicationStartup().start("spring.context.annotated-bean-reader.create");
@@ -72,7 +68,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	}
 
 	/**
-	 * Create a new AnnotationConfigApplicationContext with the given DefaultListableBeanFactory.
+	 * 使用给定的 DefaultListableBeanFactory 创建新的 AnnotationConfigApplicationContext。
 	 * @param beanFactory the DefaultListableBeanFactory instance to use for this context
 	 */
 	public AnnotationConfigApplicationContext(DefaultListableBeanFactory beanFactory) {
