@@ -88,10 +88,9 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.ReflectionUtils;
 
 /**
- * Abstract implementation of the {@link org.springframework.context.ApplicationContext}
- * interface. Doesn't mandate the type of storage used for configuration; simply
- * implements common context functionality. Uses the Template Method design pattern,
- * requiring concrete subclasses to implement abstract methods.
+ * {@link org.springframework.context.ApplicationContext} 接口的抽象实现。
+ * 不强制要求用于配置的存储类型;只需实现通用上下文功能。
+ * 使用模板方法设计模式，需要具体的子类来实现抽象方法。
  *
  * <p>In contrast to a plain BeanFactory, an ApplicationContext is supposed
  * to detect special beans defined in its internal bean factory:
