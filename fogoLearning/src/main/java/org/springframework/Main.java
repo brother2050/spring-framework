@@ -4,15 +4,13 @@ package org.springframework;
 import org.springframework.config.Config;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.model.Cat;
+import org.springframework.model.A;
 import org.springframework.model.Person;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
-		Cat bean = context.getBean(Cat.class);
+		A bean = context.getBean(A.class);
 		System.out.println(bean);
 	}
 

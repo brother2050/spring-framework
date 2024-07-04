@@ -283,8 +283,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 					singletonObject = singletonFactory.getObject();
 					newSingleton = true;
 				} catch (IllegalStateException ex) {
-					// Has the singleton object implicitly appeared in the meantime ->
-					// if yes, proceed with it since the exception indicates that state.
+					// 在此期间，单例对象是否隐式出现 -> 如果是，请继续执行，因为异常指示该状态。
 					singletonObject = this.singletonObjects.get(beanName);
 					if (singletonObject == null) {
 						throw ex;
@@ -383,8 +382,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	}
 
 	/**
-	 * Return whether the specified singleton bean is currently in creation
-	 * (within the entire factory).
+	 * 返回指定的单例 Bean 当前是否正在创建中（在整个工厂内）。
 	 *
 	 * @param beanName the name of the bean
 	 */
