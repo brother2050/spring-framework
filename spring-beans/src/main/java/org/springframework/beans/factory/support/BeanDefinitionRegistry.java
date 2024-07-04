@@ -22,17 +22,14 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.core.AliasRegistry;
 
 /**
- * Interface for registries that hold bean definitions, for example RootBeanDefinition
- * and ChildBeanDefinition instances. Typically implemented by BeanFactories that
- * internally work with the AbstractBeanDefinition hierarchy.
+ * 保存 Bean 定义的注册表的接口，例如 RootBeanDefinition 和 ChildBeanDefinition 实例。
+ * 通常由在内部使用 AbstractBeanDefinition 层次结构的 BeanFactories 实现。
  *
- * <p>This is the only interface in Spring's bean factory packages that encapsulates
- * <i>registration</i> of bean definitions. The standard BeanFactory interfaces
- * only cover access to a <i>fully configured factory instance</i>.
+ * <p>这是 Spring 的 bean factory 包中唯一封装了 bean 定义<i>注册</i>的接口。
+ * 标准的 BeanFactory 接口仅涵盖对<i>完全配置的工厂实例</i>的访问。
  *
- * <p>Spring's bean definition readers expect to work on an implementation of this
- * interface. Known implementors within the Spring core are DefaultListableBeanFactory
- * and GenericApplicationContext.
+ * <p>Spring 的 bean 定义读者希望能够实现此接口。
+ * Spring 核心中的已知实现者是 DefaultListableBeanFactory 和 GenericApplicationContext。
  *
  * @author Juergen Hoeller
  * @since 26.11.2003
@@ -98,10 +95,9 @@ public interface BeanDefinitionRegistry extends AliasRegistry {
 	int getBeanDefinitionCount();
 
 	/**
-	 * Determine whether the bean definition for the given name is overridable,
-	 * i.e. whether {@link #registerBeanDefinition} would successfully return
-	 * against an existing definition of the same name.
-	 * <p>The default implementation returns {@code true}.
+	 * 确定给定名称的 Bean 定义是否可覆盖，
+	 * 即 {@link #registerBeanDefinition} 是否会成功返回针对同名的现有定义。
+//	 * <p>默认实现返回 {@code true}。
 	 * @param beanName the name to check
 	 * @return whether the definition for the given bean name is overridable
 	 * @since 6.1
@@ -111,8 +107,7 @@ public interface BeanDefinitionRegistry extends AliasRegistry {
 	}
 
 	/**
-	 * Determine whether the given bean name is already in use within this registry,
-	 * i.e. whether there is a local bean or alias registered under this name.
+	 * 确定给定的 Bean 名称是否已在此注册表中使用，即是否有在此名称下注册的本地 Bean 或别名。
 	 * @param beanName the name to check
 	 * @return whether the given bean name is already in use
 	 */
