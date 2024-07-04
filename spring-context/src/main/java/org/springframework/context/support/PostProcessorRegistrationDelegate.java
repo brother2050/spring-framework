@@ -68,17 +68,12 @@ final class PostProcessorRegistrationDelegate {
 	public static void invokeBeanFactoryPostProcessors(
 			ConfigurableListableBeanFactory beanFactory, List<BeanFactoryPostProcessor> beanFactoryPostProcessors) {
 
-		// WARNING: Although it may appear that the body of this method can be easily
-		// refactored to avoid the use of multiple loops and multiple lists, the use
-		// of multiple lists and multiple passes over the names of processors is
-		// intentional. We must ensure that we honor the contracts for PriorityOrdered
-		// and Ordered processors. Specifically, we must NOT cause processors to be
-		// instantiated (via getBean() invocations) or registered in the ApplicationContext
-		// in the wrong order.
+		// 警告：尽管看起来可以很容易地重构此方法的主体以避免使用多个循环和多个列表，但使用多个列表和对处理器名称的多次传递是有意为之的。
+		// 我们必须确保遵守 PriorityOrdered 和 Ordered 处理器的合同。
+		// 具体来说，我们不能导致处理器被实例化（通过 getBean（） 调用）或以错误的顺序在 ApplicationContext 中注册。
 		//
-		// Before submitting a pull request (PR) to change this method, please review the
-		// list of all declined PRs involving changes to PostProcessorRegistrationDelegate
-		// to ensure that your proposal does not result in a breaking change:
+		// 在提交拉取请求 （PR） 以更改此方法之前，请查看涉及 PostProcessorRegistrationDelegate 更改的所有被拒绝的 PR 的列表，
+		// 以确保您的提案不会导致重大更改：
 		// https://github.com/spring-projects/spring-framework/issues?q=PostProcessorRegistrationDelegate+is%3Aclosed+label%3A%22status%3A+declined%22
 
 		// Invoke BeanDefinitionRegistryPostProcessors first, if any.

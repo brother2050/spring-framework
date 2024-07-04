@@ -26,9 +26,8 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 /**
- * {@link org.springframework.beans.factory.config.BeanPostProcessor}
- * implementation that passes the context's default {@link LoadTimeWeaver}
- * to beans that implement the {@link LoadTimeWeaverAware} interface.
+ * {@link org.springframework.beans.factory.config.BeanPostProcessor} 实现，
+ * 将上下文的默认 {@link LoadTimeWeaver} 传递给实现 {@link LoadTimeWeaverAware} 接口的 bean。
  *
  * <p>{@link org.springframework.context.ApplicationContext Application contexts}
  * will automatically register this with their underlying {@link BeanFactory bean factory},
