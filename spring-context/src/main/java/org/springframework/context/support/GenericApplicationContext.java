@@ -76,7 +76,7 @@ import org.springframework.util.Assert;
  *
  * MyBean myBean = (MyBean) ctx.getBean("myBean");
  * ...</pre>
- *
+ * <p>
  * 对于 XML Bean 定义的典型情况，还可以使用 {@link ClassPathXmlApplicationContext}
  * 或 {@link FileSystemXmlApplicationContext}，它们更易于设置，但不太灵活，
  * 因为您可以只对 XML Bean 定义使用标准资源位置，而不是混合任意 Bean 定义格式。
@@ -87,11 +87,11 @@ import org.springframework.util.Assert;
  * @author Chris Beams
  * @author Stephane Nicoll
  * @author Sam Brannen
- * @since 1.1.2
  * @see #registerBeanDefinition
  * @see #refresh()
  * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader
  * @see org.springframework.beans.factory.support.PropertiesBeanDefinitionReader
+ * @since 1.1.2
  */
 public class GenericApplicationContext extends AbstractApplicationContext implements BeanDefinitionRegistry {
 
@@ -107,6 +107,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 
 	/**
 	 * Create a new GenericApplicationContext.
+	 *
 	 * @see #registerBeanDefinition
 	 * @see #refresh
 	 */
@@ -116,6 +117,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 
 	/**
 	 * 使用给定的 DefaultListableBeanFactory 创建新的 GenericApplicationContext。
+	 *
 	 * @param beanFactory 要用于此上下文的 DefaultListableBeanFactory 实例
 	 * @see #registerBeanDefinition
 	 * @see #refresh
@@ -127,6 +129,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 
 	/**
 	 * 使用给定的父级创建新的 GenericApplicationContext。
+	 *
 	 * @param parent the parent application context
 	 * @see #registerBeanDefinition
 	 * @see #refresh
@@ -138,8 +141,9 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 
 	/**
 	 * 使用给定的 DefaultListableBeanFactory 创建新的 GenericApplicationContext。
+	 *
 	 * @param beanFactory the DefaultListableBeanFactory instance to use for this context
-	 * @param parent the parent application context
+	 * @param parent      the parent application context
 	 * @see #registerBeanDefinition
 	 * @see #refresh
 	 */
@@ -151,6 +155,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 
 	/**
 	 * 设置此应用程序上下文的父级，并相应地设置内部 BeanFactory 的父级。
+	 *
 	 * @see org.springframework.beans.factory.config.ConfigurableBeanFactory#setParentBeanFactory
 	 */
 	@Override
@@ -168,8 +173,9 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	/**
 	 * 设置是否应允许通过注册具有相同名称的不同定义来覆盖 Bean 定义，
 	 * 并自动替换前者。否则，将引发异常。默认值为“true”。
-	 * @since 3.0
+	 *
 	 * @see org.springframework.beans.factory.support.DefaultListableBeanFactory#setAllowBeanDefinitionOverriding
+	 * @since 3.0
 	 */
 	public void setAllowBeanDefinitionOverriding(boolean allowBeanDefinitionOverriding) {
 		this.beanFactory.setAllowBeanDefinitionOverriding(allowBeanDefinitionOverriding);
@@ -178,8 +184,9 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	/**
 	 * 设置是否允许 Bean 之间的循环引用 - 并自动尝试解析它们。
 	 * <p>默认值为“true”。关闭此选项可在遇到循环引用时引发异常，从而完全禁止它们。
-	 * @since 3.0
+	 *
 	 * @see org.springframework.beans.factory.support.DefaultListableBeanFactory#setAllowCircularReferences
+	 * @since 3.0
 	 */
 	public void setAllowCircularReferences(boolean allowCircularReferences) {
 		this.beanFactory.setAllowCircularReferences(allowCircularReferences);
@@ -192,6 +199,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * <p>指定自定义 ResourceLoader 的主要原因是以特定方式解析资源路径（不带 URL 前缀）。
 	 * 默认行为是将此类路径解析为类路径位置。若要将资源路径解析为文件系统位置，请在此处指定 FileSystemResourceLoader。
 	 * <p>还可以传入完整的 ResourcePatternResolver，上下文将自动检测该解析程序，并用于 {@code getResources} 调用。否则，将应用默认资源模式匹配。
+	 *
 	 * @see #getResource
 	 * @see org.springframework.core.io.DefaultResourceLoader
 	 * @see org.springframework.core.io.FileSystemResourceLoader
@@ -212,6 +220,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * <p>从 Spring Framework 5.3.22 开始，此方法也遵循已注册的
 	 * {@linkplain #getProtocolResolvers() protocol resolvers} when a custom
 	 * {@code ResourceLoader} has been set.
+	 *
 	 * @see #setResourceLoader(ResourceLoader)
 	 * @see #addProtocolResolver(ProtocolResolver)
 	 */
@@ -233,6 +242,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * This implementation delegates to this context's ResourceLoader if it
 	 * implements the ResourcePatternResolver interface, falling back to the
 	 * default superclass behavior otherwise.
+	 *
 	 * @see #setResourceLoader
 	 */
 	@Override
@@ -266,6 +276,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	/**
 	 * Do nothing: We hold a single internal BeanFactory and rely on callers
 	 * to register beans through our public methods (or the BeanFactory's).
+	 *
 	 * @see #registerBeanDefinition
 	 */
 	@Override
@@ -307,6 +318,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * <p><b>NOTE:</b> You need to call {@link #refresh()} to initialize the
 	 * bean factory and its contained beans with application context semantics
 	 * (autodetecting BeanFactoryPostProcessors, etc).
+	 *
 	 * @return the internal bean factory (as DefaultListableBeanFactory)
 	 */
 	public final DefaultListableBeanFactory getDefaultListableBeanFactory() {
@@ -379,10 +391,11 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * processing that optimizes the application context, typically at build time.
 	 * <p>In this mode, only {@link BeanDefinitionRegistryPostProcessor} and
 	 * {@link MergedBeanDefinitionPostProcessor} are invoked.
+	 *
 	 * @param runtimeHints the runtime hints
-	 * @throws BeansException if the bean factory could not be initialized
+	 * @throws BeansException        if the bean factory could not be initialized
 	 * @throws IllegalStateException if already initialized and multiple refresh
-	 * attempts are not supported
+	 *                               attempts are not supported
 	 * @since 6.0
 	 */
 	public void refreshForAotProcessing(RuntimeHints runtimeHints) {
@@ -401,6 +414,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 
 	/**
 	 * Pre-determine bean types in order to trigger early proxy class creation.
+	 *
 	 * @see org.springframework.beans.factory.BeanFactory#getType
 	 * @see SmartInstantiationAwareBeanPostProcessor#determineBeanType
 	 */
@@ -432,11 +446,12 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	/**
 	 * Register a bean from the given bean class, optionally providing explicit
 	 * constructor arguments for consideration in the autowiring process.
-	 * @param beanClass the class of the bean
+	 *
+	 * @param beanClass       the class of the bean
 	 * @param constructorArgs custom argument values to be fed into Spring's
-	 * constructor resolution algorithm, resolving either all arguments or just
-	 * specific ones, with the rest to be resolved through regular autowiring
-	 * (may be {@code null} or empty)
+	 *                        constructor resolution algorithm, resolving either all arguments or just
+	 *                        specific ones, with the rest to be resolved through regular autowiring
+	 *                        (may be {@code null} or empty)
 	 * @since 5.2 (since 5.0 on the AnnotationConfigApplicationContext subclass)
 	 */
 	public <T> void registerBean(Class<T> beanClass, Object... constructorArgs) {
@@ -446,12 +461,13 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	/**
 	 * Register a bean from the given bean class, optionally providing explicit
 	 * constructor arguments for consideration in the autowiring process.
-	 * @param beanName the name of the bean (may be {@code null})
-	 * @param beanClass the class of the bean
+	 *
+	 * @param beanName        the name of the bean (may be {@code null})
+	 * @param beanClass       the class of the bean
 	 * @param constructorArgs custom argument values to be fed into Spring's
-	 * constructor resolution algorithm, resolving either all arguments or just
-	 * specific ones, with the rest to be resolved through regular autowiring
-	 * (may be {@code null} or empty)
+	 *                        constructor resolution algorithm, resolving either all arguments or just
+	 *                        specific ones, with the rest to be resolved through regular autowiring
+	 *                        (may be {@code null} or empty)
 	 * @since 5.2 (since 5.0 on the AnnotationConfigApplicationContext subclass)
 	 */
 	public <T> void registerBean(@Nullable String beanName, Class<T> beanClass, Object... constructorArgs) {
@@ -466,12 +482,13 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	/**
 	 * Register a bean from the given bean class, optionally customizing its
 	 * bean definition metadata (typically declared as a lambda expression).
-	 * @param beanClass the class of the bean (resolving a public constructor
-	 * to be autowired, possibly simply the default constructor)
+	 *
+	 * @param beanClass   the class of the bean (resolving a public constructor
+	 *                    to be autowired, possibly simply the default constructor)
 	 * @param customizers one or more callbacks for customizing the factory's
-	 * {@link BeanDefinition}, e.g. setting a lazy-init or primary flag
-	 * @since 5.0
+	 *                    {@link BeanDefinition}, e.g. setting a lazy-init or primary flag
 	 * @see #registerBean(String, Class, Supplier, BeanDefinitionCustomizer...)
+	 * @since 5.0
 	 */
 	public final <T> void registerBean(Class<T> beanClass, BeanDefinitionCustomizer... customizers) {
 		registerBean(null, beanClass, null, customizers);
@@ -480,13 +497,14 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	/**
 	 * Register a bean from the given bean class, optionally customizing its
 	 * bean definition metadata (typically declared as a lambda expression).
-	 * @param beanName the name of the bean (may be {@code null})
-	 * @param beanClass the class of the bean (resolving a public constructor
-	 * to be autowired, possibly simply the default constructor)
+	 *
+	 * @param beanName    the name of the bean (may be {@code null})
+	 * @param beanClass   the class of the bean (resolving a public constructor
+	 *                    to be autowired, possibly simply the default constructor)
 	 * @param customizers one or more callbacks for customizing the factory's
-	 * {@link BeanDefinition}, e.g. setting a lazy-init or primary flag
-	 * @since 5.0
+	 *                    {@link BeanDefinition}, e.g. setting a lazy-init or primary flag
 	 * @see #registerBean(String, Class, Supplier, BeanDefinitionCustomizer...)
+	 * @since 5.0
 	 */
 	public final <T> void registerBean(
 			@Nullable String beanName, Class<T> beanClass, BeanDefinitionCustomizer... customizers) {
@@ -499,12 +517,13 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * obtaining a new instance (typically declared as a lambda expression or
 	 * method reference), optionally customizing its bean definition metadata
 	 * (again typically declared as a lambda expression).
-	 * @param beanClass the class of the bean
-	 * @param supplier a callback for creating an instance of the bean
+	 *
+	 * @param beanClass   the class of the bean
+	 * @param supplier    a callback for creating an instance of the bean
 	 * @param customizers one or more callbacks for customizing the factory's
-	 * {@link BeanDefinition}, e.g. setting a lazy-init or primary flag
-	 * @since 5.0
+	 *                    {@link BeanDefinition}, e.g. setting a lazy-init or primary flag
 	 * @see #registerBean(String, Class, Supplier, BeanDefinitionCustomizer...)
+	 * @since 5.0
 	 */
 	public final <T> void registerBean(
 			Class<T> beanClass, Supplier<T> supplier, BeanDefinitionCustomizer... customizers) {
@@ -519,16 +538,17 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 	 * (again typically declared as a lambda expression).
 	 * <p>This method can be overridden to adapt the registration mechanism for
 	 * all {@code registerBean} methods (since they all delegate to this one).
-	 * @param beanName the name of the bean (may be {@code null})
-	 * @param beanClass the class of the bean
-	 * @param supplier a callback for creating an instance of the bean (in case
-	 * of {@code null}, resolving a public constructor to be autowired instead)
+	 *
+	 * @param beanName    the name of the bean (may be {@code null})
+	 * @param beanClass   the class of the bean
+	 * @param supplier    a callback for creating an instance of the bean (in case
+	 *                    of {@code null}, resolving a public constructor to be autowired instead)
 	 * @param customizers one or more callbacks for customizing the factory's
-	 * {@link BeanDefinition}, e.g. setting a lazy-init or primary flag
+	 *                    {@link BeanDefinition}, e.g. setting a lazy-init or primary flag
 	 * @since 5.0
 	 */
 	public <T> void registerBean(@Nullable String beanName, Class<T> beanClass,
-			@Nullable Supplier<T> supplier, BeanDefinitionCustomizer... customizers) {
+								 @Nullable Supplier<T> supplier, BeanDefinitionCustomizer... customizers) {
 
 		ClassDerivedBeanDefinition beanDefinition = new ClassDerivedBeanDefinition(beanClass);
 		if (supplier != null) {
@@ -568,7 +588,7 @@ public class GenericApplicationContext extends AbstractApplicationContext implem
 			Class<?> clazz = getBeanClass();
 			Constructor<?> primaryCtor = BeanUtils.findPrimaryConstructor(clazz);
 			if (primaryCtor != null) {
-				return new Constructor<?>[] {primaryCtor};
+				return new Constructor<?>[]{primaryCtor};
 			}
 			Constructor<?>[] publicCtors = clazz.getConstructors();
 			if (publicCtors.length > 0) {
