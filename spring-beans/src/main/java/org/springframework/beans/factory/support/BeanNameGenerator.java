@@ -27,10 +27,9 @@ import org.springframework.beans.factory.config.BeanDefinition;
 public interface BeanNameGenerator {
 
 	/**
-	 * Generate a bean name for the given bean definition.
+	 * 为给定的 Bean 定义生成 Bean 名称。
 	 * @param definition the bean definition to generate a name for
-	 * @param registry the bean definition registry that the given definition
-	 * is supposed to be registered with
+	 * @param registry 给定定义应注册到的 Bean 定义注册表
 	 * @return the generated bean name
 	 */
 	String generateBeanName(BeanDefinition definition, BeanDefinitionRegistry registry);
